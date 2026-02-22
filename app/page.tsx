@@ -1,7 +1,7 @@
 "use client";
 
-import { CounterBox, saveCount, StatsBox } from "@/src/features/dashboard";
-import { useEffect, useState } from "react";
+import { CounterBox, StatsBox } from "@/src/features/dashboard";
+import { useCounter } from "@/src/hooks";
 
 // The `lastUpdate` state is defined in this parent component
 // to improve accessibility for other components and maintain cleaner architecture.
@@ -18,9 +18,7 @@ export default function DashboardPage() {
    * const and variables
    * _______________________________________________________________________________
    */
-  const [count, setCount] = useState<number>(0);
-  const [lastUpdate, setLastUpdate] = useState<string | null>(null);
-
+  const { count, increment, decrement, lastUpdate } = useCounter();
   /**
    * services
    * _______________________________________________________________________________
@@ -35,15 +33,6 @@ export default function DashboardPage() {
    * hooks and methods
    * _______________________________________________________________________________
    */
-  const onIncrement = () => {
-    setCount((prev) => prev + 1);
-    setLastUpdate(new Date().toISOString());
-  };
-
-  const onDecrement = () => {
-    setCount((prev) => prev - 1);
-    setLastUpdate(new Date().toISOString());
-  };
 
   /**
    * template
@@ -64,8 +53,8 @@ export default function DashboardPage() {
       <h1>Dashboard Page</h1>
       <StatsBox count={count} />
       <CounterBox
-        onIncrement={onIncrement}
-        onDecrement={onDecrement}
+        onIncrement={increment}
+        onDecrement={decrement}
         lastUpdate={lastUpdate}
       />
     </div>
