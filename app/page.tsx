@@ -1,7 +1,7 @@
 "use client";
 
-import { CounterBox, StatsBox } from "@/src/features/dashboard";
-import { useState } from "react";
+import { CounterBox, saveCount, StatsBox } from "@/src/features/dashboard";
+import { useEffect, useState } from "react";
 
 // The `lastUpdate` state is defined in this parent component
 // to improve accessibility for other components and maintain cleaner architecture.
